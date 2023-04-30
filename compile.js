@@ -3,7 +3,7 @@ const path = require('path')
 
 const data = fs.readFileSync(path.join(__dirname, 'build.js'))
 const before = Buffer.from(`const ___defined = {}
-let ___exports = {}
+let ___exports = null
 `)
 const after = Buffer.from(`
 function ___require(name) {
@@ -22,5 +22,5 @@ function define(target, functions, callback) {
         return ___defined[i]
     }))
 }
-module.exports = ___exports`)
+module.exports = ___exports === null ? exports : ___exports`)
 fs.writeFileSync(path.join(__dirname, 'build.js'), Buffer.concat([before, data, after]))
