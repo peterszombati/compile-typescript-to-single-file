@@ -25,3 +25,4 @@ function define(target, functions, callback) {
 module.exports = ___exports === null ? exports : ___exports`)
 fs.writeFileSync(path.join(__dirname, 'build.js'), Buffer.concat([before, data, after]))
 fs.unlinkSync(path.join(__dirname, 'index.js'))
+fs.renameSync(path.join(__dirname, 'index.d.ts'),path.join(__dirname, 'build.d.ts'))
